@@ -13,10 +13,10 @@ export default function Hero() {
             Pizza is the missing piece that makes everyday complete, a simple yet delicious joy in life
            </p>
            <div className="flex gap-4 text-sm">
-            <button className="px-6 py-3 mt-8 flex gap-2 items-center uppercase bg-primary rounded-md shadow-lg text-white"> Order now
+            <button className="px-6 py-3 mt-8  flex justify-center gap-2 items-center uppercase bg-primary rounded-md shadow-lg text-white"> Order now
             <Right />
             </button>
-            <button className="px-6 py-3 mt-8 flex gap-2 rounded-md shadow-lg text-gray-500 semibold"> Learn more <Right /></button>
+            <button className="px-6 py-3 mt-8 flex items-center border-0 gap-2 rounded-md shadow-lg text-gray-500 semibold"> Learn more <Right /></button>
 
            </div>
            </div>

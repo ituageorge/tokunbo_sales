@@ -8,24 +8,31 @@ const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [creatingUser, setCreatingUser] = useState(false)
 const [userCreated, setUserCreated] = useState(false)
+const [error, setError] = useState(false);
 
 async function handleFormSubmit(e) {
-e.preventDefault();
-setCreatingUser(true);
-// setUserCreated(false);
-  await fetch('/api/register', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ email, password })
+    e.preventDefault();
+    setCreatingUser(true);
+    setError(false);
+    setUserCreated(false);
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      body: JSON.stringify({email, password}),
+      headers: {'Content-Type': 'application/json'},
     });
+    if (response.ok) {
+      setUserCreated(true);
+    }
+    else {
+      setError(true);
+    }
     setCreatingUser(false);
-    setUserCreated(true);
-}
+  }
 
     return(
         <section className="mt-8">
             <h1 className=" mt-4 text-center text-primary text-4xl">Register</h1>
-<form className="block max-w-xl mx-auto " onSubmit={handleFormSubmit}>
+
     {userCreated && (
         <div className='my-4 text-center'>
             User created.<br/>
@@ -33,6 +40,14 @@ setCreatingUser(true);
             <Link className="underline" href={'/login'}> login &raquo;</Link>
         </div>
     )}
+    {error && (
+        <div className='my-4 text-center'>
+            Error creating user<br/>
+            Try again later...
+        </div>
+      )}
+<form className="block max-w-xl mx-auto " onSubmit={handleFormSubmit}>
+
     <input type='email' placeholder="email" value={email} 
     disabled={creatingUser}
     onChange={e => setEmail(e.target.value)} />
@@ -47,6 +62,10 @@ or login with provider
 <Image src={'/google-logo-png.png'} width={24} height={24} alt={'Log in with google'} />
 Login with google
 </button>
+<div className="text-center my-4 text-gray-500 border-t pt-4">
+    Existing account? {' '} 
+    <Link href={"/login"}> Login here &raquo;</Link>
+</div>
 </form>
         </section>
     )
