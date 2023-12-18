@@ -3,16 +3,31 @@
 import { useSession } from 'next-auth/react';
 import { signOut, getSession, isUnauthenticated } from 'next-auth/react';
 import Link from 'next/link';
+// import { useState } from 'react';
 
 // Define the Header component
 export default function Header() {
 
    // Use the useSession hook to get the session data and status
-   const { status } = useSession();
-   const { data: session } = getSession();
-  //  console.log('seession', session)
-   console.log('statuss', status)
+   const { data: session, status } = useSession();
 
+//    // Check if session is defined before accessing properties
+// if (!session) {
+//   // Handle the case where session is not defined, e.g., redirect or show an error
+//   return null
+// }
+
+   console.log('session', session?.user);
+   console.log('status', status);
+
+    // Extract user data from the session
+   const userData = session?.user;
+   let userName = userData?.name || userData?.email;
+
+  // Process the username to remove spaces
+  if (userName?.includes(' ')) {
+    userName = userName.split(' ')[0];
+  }
 
    // Render the header component
     return(
@@ -32,9 +47,13 @@ export default function Header() {
        {/* Check if the user is authenticated */}
       {status === 'authenticated' && (
           // If authenticated, render the logout button
-        <button
+
+          <>
+          <Link href={'/profile'} className='whitespace-nowrap'>Hello, {userName}</Link>
+        <button type='button'
         onClick={() => signOut()}
         className="bg-primary rounded-md text-white px-6 py-2">Logout</button>
+        </>
      )}
 
       {/* Check if the user is unauthenticated */}
