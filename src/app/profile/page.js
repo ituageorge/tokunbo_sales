@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/dist/server/api-utils";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { useRouter } from "next/router";
 // useRouter
 export default function ProfilePage() {
@@ -11,9 +11,15 @@ export default function ProfilePage() {
     const session = useSession();
     const [userName, setUserName] = useState(session?.data?.user?.name || '' )
     let {status} = session;
-    console.log('session4Profile', session?.data?.user?.image)
+    // console.log('session4Profile', session?.data?.user?.image)
 
-    const handleProfileInputUpdate = (e) => {
+        useEffect(() => {
+            if(status === 'authenticated') {
+                setUserName(session?.data?.user?.name)
+            }
+        }, [session, status]);
+
+     const handleProfileInputUpdate = (e) => {
         e.preventDefault();
         fetch('/api/profile', {
             method: 'PUT',
