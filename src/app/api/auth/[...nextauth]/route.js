@@ -22,7 +22,7 @@ export const authOptions = {
       type: 'credentials',
       credentials: {
         email: { label: "Email", type: "email", placeholder: "test@example.com" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
         console.log('credentials', {credentials});
