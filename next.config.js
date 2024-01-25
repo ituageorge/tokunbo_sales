@@ -4,6 +4,12 @@ const nextConfig = {
         domains: ['res.cloudinary.com'],
         remotePatterns: [
             {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com',
+                port: '',
+                pathname: `/${process.env.CLOUDINARY_NAME}/image/upload/**`,
+              },
+            {
                 protocol:'https',
                 hostname: '*.googleusercontent.com',
             },
@@ -16,3 +22,5 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
+
+

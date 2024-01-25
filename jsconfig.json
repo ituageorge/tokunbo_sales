@@ -1,7 +1,15 @@
 {
   "compilerOptions": {
+    "jsx": "react",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": false,
+    "types": ["next", "node"],
     "paths": {
       "@/*": ["./src/*"]
     }
   }
 }
+
+
