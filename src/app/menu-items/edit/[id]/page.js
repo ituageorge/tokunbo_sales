@@ -1,6 +1,6 @@
 'use client';
 import DeleteButton from "@/components/DeleteButton";
-import useProfile from "@/components/UseProfile";
+import { useProfile } from "@/components/UseProfile";
 import Left from "@/components/icons/Left";
 import EditableImage from "@/components/layout/EditableImage";
 import MenuItemForm from "@/components/layout/MenuItemForm";

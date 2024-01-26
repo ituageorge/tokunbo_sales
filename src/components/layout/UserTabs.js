@@ -36,12 +36,12 @@ import { usePathname } from 'next/navigation';
           </Link>
         </>
       )}
-      {/* <Link
+      <Link
         className={path === '/orders' ? 'active' : ''}
         href={'/orders'}
       >
         Orders
-      </Link> */}
+      </Link>
     </div>
  );
 }

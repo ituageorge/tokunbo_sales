@@ -1,9 +1,12 @@
+'use client';
 import Image from "next/image";
 import MenuItem from "../menu/MenuItem";
 import SectionHeaders from "./SectionHeaders";
+import { useEffect } from "react";
 // import { Container } from "postcss";
 
 export default function HomeMenu() {
+
     return(
         <section className="">
             <div className="absolute left-0 right-0 w-full ">
@@ -18,7 +21,7 @@ export default function HomeMenu() {
              <div className="text-center mb-4">
            <SectionHeaders 
            subHeader={'check out'} 
-           mainHeader={'Menu'}
+           mainHeader={'Our Best Sellers'}
            />
         </div>
         <div className="grid grid-cols-3 gap-4">

@@ -1,5 +1,5 @@
 'use client';
-import useProfile from "@/components/UseProfile";
+import { useProfile } from "@/components/UseProfile";
 import Right from "@/components/icons/Right";
 import UserTabs from "@/components/layout/UserTabs";
 import Image from "next/image";
@@ -30,7 +30,7 @@ export default function MenuItemsPage() {
  }
  
   return (
-    <section className="mt-8 max-w-md mx-auto">
+    <section className="mt-8 max-w-2xl mx-auto">
       <UserTabs isAdmin={true} />
       <div className="mt-8">
         <Link

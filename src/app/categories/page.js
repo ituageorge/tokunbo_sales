@@ -1,8 +1,8 @@
 'use client';
 import DeleteButton from "@/components/DeleteButton";
+import { useProfile } from "@/components/UseProfile";
 import UserTabs from "@/components/layout/UserTabs";
 import {useEffect, useState} from "react";
-import useProfile from "@/components/UseProfile";
 import toast from "react-hot-toast";
 
 export default function CategoriesPage() {
@@ -78,7 +78,7 @@ export default function CategoriesPage() {
     return 'Loading user info...';
   }
 
-  if (profileData && !profileData.admin) {
+  if (!profileData.admin) {
     return 'Not an admin';
   }
 
