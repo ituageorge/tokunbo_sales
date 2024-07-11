@@ -1,6 +1,7 @@
 'use client';
 import {signIn} from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import {useState} from "react";
 
 export default function LoginPage() {
@@ -46,7 +47,14 @@ export default function LoginPage() {
           <Image src={'/google-logo-png.png'} alt={'Log in with google'} width={24} height={24} />
           Login with google
         </button>
+        <div>
+        <p className="text-red-500 text-sm mt-4 ">
+          Forget Password?
+          <Link href="/forget-password" className="ml-2 text-blue-500 hover:underline">Reset Password</Link>
+        </p>
+      </div>
       </form>
+      
     </section>
   );
 }

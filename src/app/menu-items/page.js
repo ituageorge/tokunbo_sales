@@ -1,7 +1,8 @@
 'use client';
-import { useProfile } from "@/components/UseProfile";
-import Right from "@/components/icons/Right";
-import UserTabs from "@/components/layout/UserTabs";
+// import { useProfile } from "../components/UseProfile";
+import {useProfile} from '../../components/UseProfile';
+import Right from "../../components/icons/Right";
+import UserTabs from "../../components/layout/UserTabs";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -49,7 +50,7 @@ export default function MenuItemsPage() {
             key={item._id}
             >
               <div className="relative">
-              <Image className="rounded-md" src={item.image} alt={''} width={200} height={200}/>
+              <Image className="rounded-md" src={item.image} alt={''} width={300} height={200}/>
               </div>
               <div className="text-center">
               {item.name}

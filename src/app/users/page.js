@@ -1,6 +1,7 @@
 'use client';
-import { useProfile } from "@/components/UseProfile";
-import UserTabs from "@/components/layout/UserTabs";
+import { useProfile } from "../../components/UseProfile";
+
+import UserTabs from "../../components/layout/UserTabs";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 
@@ -43,8 +44,13 @@ export default function UsersPage() {
                 <span className="text-gray-500">{user.email}</span>
               </div>
               <div>
-                <Link className="button" href={'/users/' + user._id}>
-                  Edit
+                <Link className="button bg-green-300" href={'/users/' + user._id}>
+                  Edit 
+                </Link>
+              </div>
+              <div className="">
+                <Link className="button bg-red-300" href={'/debt/' + user._id}>
+                  Debt
                 </Link>
               </div>
             </div>

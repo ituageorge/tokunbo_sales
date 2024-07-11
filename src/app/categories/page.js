@@ -1,9 +1,10 @@
 'use client';
-import DeleteButton from "@/components/DeleteButton";
-import { useProfile } from "@/components/UseProfile";
-import UserTabs from "@/components/layout/UserTabs";
+import DeleteButton from "../../components/DeleteButton"
+import { useProfile } from "../../components/UseProfile";
+import UserTabs from "../../components/layout/UserTabs";
 import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
+
 
 export default function CategoriesPage() {
 
@@ -16,17 +17,15 @@ export default function CategoriesPage() {
     fetchCategories();
   }, []);
 
-  function fetchCategories() {
-    fetch('/api/categories').then(res => {
-      res.json().then(categories => {
-        setCategories(categories);
-      });
-    });
+  async function fetchCategories() {
+    const response = await fetch('/api/categories');
+    const categories = await response.json();
+    setCategories(categories);
   }
 
   async function handleCategorySubmit(ev) {
     ev.preventDefault();
-    const creationPromise = new Promise(async (resolve, reject) => {
+    try {
       const data = {name:categoryName};
       if (editedCategory) {
         data._id = editedCategory._id;
@@ -36,49 +35,42 @@ export default function CategoriesPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
+      if (response.ok) {
+        toast.success(editedCategory ? 'Category updated' : 'Category created');
+      } else {
+        toast.error('Error, sorry...');
+      }
       setCategoryName('');
       fetchCategories();
       setEditedCategory(null);
-      if (response.ok)
-        resolve();
-      else
-        reject();
-    });
-    await toast.promise(creationPromise, {
-      loading: editedCategory
-                 ? 'Updating category...'
-                 : 'Creating your new category...',
-      success: editedCategory ? 'Category updated' : 'Category created',
-      error: 'Error, sorry...',
-    });
+    } catch (error) {
+      console.error(error);
+      toast.error('Error, sorry...');
+    }
   }
 
   async function handleDeleteClick(_id) {
-    const promise = new Promise(async (resolve, reject) => {
+    try {
       const response = await fetch('/api/categories?_id='+_id, {
         method: 'DELETE',
       });
       if (response.ok) {
-        resolve();
+        toast.success('Deleted');
       } else {
-        reject();
+        toast.error('Error');
       }
-    });
-
-    await toast.promise(promise, {
-      loading: 'Deleting...',
-      success: 'Deleted',
-      error: 'Error',
-    });
-
-    fetchCategories();
+      fetchCategories();
+    } catch (error) {
+      console.error(error);
+      toast.error('Error');
+    }
   }
 
   if (profileLoading) {
     return 'Loading user info...';
   }
 
-  if (!profileData.admin) {
+  if (profileData && !profileData.admin) {
     return 'Not an admin';
   }
 

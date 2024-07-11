@@ -1,10 +1,17 @@
-import AddressInputs from "@/components/layout/AddressInputs";
+'use client';
+import AddressInputs from "../layout/AddressInputs";
+
+// import {useProfile} from "../components/UseProfile";
+import {useProfile} from "../UseProfile";
+// import { useSession } from "next-auth/react";
+
 import {useState} from "react";
 import EditableImage from "./EditableImage";
-import { useProfile } from "../UseProfile";
-
 
 export default function UserForm({user,onSave}) {
+  // const session = useSession();
+// const id = session?.data?.user?._id;
+
   const [userName, setUserName] = useState(user?.name || '');
   const [image, setImage] = useState(user?.image || '');
   const [phone, setPhone] = useState(user?.phone || '');
@@ -34,7 +41,7 @@ export default function UserForm({user,onSave}) {
         className="grow"
         onSubmit={ev =>
           onSave(ev, {
-            name:userName, image, phone, admin,
+            name:userName, userId: user?._id, image, phone, admin,
             streetAddress, city, country, postalCode,
           })
         }
@@ -57,7 +64,7 @@ export default function UserForm({user,onSave}) {
           addressProps={{phone, streetAddress, postalCode, city, country}}
           setAddressProp={handleAddressChange}
         />
-        { loggedInUserData && loggedInUserData.admin && (
+        {loggedInUserData.admin && (
           <div>
             <label className="p-2 inline-flex items-center gap-2 mb-2" htmlFor="adminCb">
               <input

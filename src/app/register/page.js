@@ -1,7 +1,9 @@
 "use client";
+import {signIn} from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function RegisterPage() {
 const [email, setEmail] = useState('');
@@ -22,6 +24,7 @@ async function handleFormSubmit(e) {
     });
     if (response.ok) {
       setUserCreated(true);
+      toast.success("Success")
     }
     else {
       setError(true);

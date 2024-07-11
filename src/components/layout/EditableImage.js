@@ -1,13 +1,9 @@
-
-import { useState } from 'react';
 import Image from "next/image";
 import toast from "react-hot-toast";
 
 export default function EditableImage({link, setLink}) {
 
-//  const [newLink, setNewLink] = useState('');
-
- async function handleFileChange(ev) {
+  async function handleFileChange(ev) {
     const files = ev.target.files;
     if (files?.length === 1) {
       const data = new FormData;
@@ -19,9 +15,7 @@ export default function EditableImage({link, setLink}) {
       }).then(response => {
         if (response.ok) {
           return response.json().then(link => {
-            console.log('linkkkkk', link)
-            // setNewLink(link);
-            setLink(link)
+            setLink(link);
           })
         }
         throw new Error('Something went wrong');
@@ -33,9 +27,9 @@ export default function EditableImage({link, setLink}) {
         error: 'Upload error',
       });
     }
- }
+  }
 
- return (
+  return (
     <>
       {link && (
         <Image className="rounded-lg w-full h-full mb-1" src={link} width={250} height={250} alt={'avatar'} />
@@ -50,5 +44,5 @@ export default function EditableImage({link, setLink}) {
         <span className="block border border-gray-300 rounded-lg p-2 text-center cursor-pointer">Change image</span>
       </label>
     </>
- );
+  );
 }

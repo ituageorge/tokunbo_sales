@@ -1,7 +1,12 @@
 import {model, models, Schema} from "mongoose";
-
+import mongoose from 'mongoose';
 
 const UserInfoSchema = new Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  name: {type: String},
     email: {type: String, required: true},
     streetAddress: {type: String},
    postalCode: {type: String},

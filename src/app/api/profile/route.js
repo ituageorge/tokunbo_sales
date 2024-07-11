@@ -1,6 +1,7 @@
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
-import { User } from "@/app/models/User";
-import { UserInfo } from "@/app/models/UserInfo";
+
+import { authOptions } from "../auth/[...nextauth]/route";
+import { User } from "../../models/User";
+import { UserInfo } from "../../models/UserInfo";
 import mongoose from "mongoose";
 import {getServerSession} from "next-auth";
 
@@ -14,6 +15,9 @@ export async function PUT(req) {
     filter = {_id};
   } else {
     const session = await getServerSession(authOptions);
+
+    // console.log("sessionppp", session);
+
     const email = session.user.email;
     filter = {email};
   }
@@ -36,6 +40,9 @@ export async function GET(req) {
     filterUser = {_id};
   } else {
     const session = await getServerSession(authOptions);
+
+    console.log("sessionppp", session);
+
     const email = session?.user?.email;
     if (!email) {
       return Response.json({});
@@ -44,8 +51,23 @@ export async function GET(req) {
   }
 
   const user = await User.findOne(filterUser).lean();
-  const userInfo = await UserInfo.findOne({email:user.email}).lean();
+  // console.log('ueserr123', user._id);
 
-  return Response.json({...user, ...userInfo});
+  const userInfo = await UserInfo.findOne({email:user.email}).lean();
+// console.log('uese3', userInfo._id);
+
+  // return Response.json({...user,  userInfo: {...userInfo}});
+  // return Response.json({...userInfo,  user: {...user}});
+// 
+  return Response.json({...userInfo,  ...user});
+
+  // return Response.json({
+  //   ...user,
+  //   userId: user?._id, // Add _id to the response
+  //   userInfo: {
+  //     ...userInfo,
+  //     _id: userInfo?._id, // Add _id to the response
+  //   },
+  // });
 
 }

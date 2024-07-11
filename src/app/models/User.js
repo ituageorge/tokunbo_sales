@@ -4,6 +4,14 @@ const UserSchema = new Schema({
   name: {type: String},
   email: {type: String, required: true, unique: true},
   password: {type: String},
+  resetToken: {
+    type: String,
+    required: false
+  },
+  resetTokenExpiry:{
+    type: Date,
+    required: false
+  },
   image: {type: String},
 }, {timestamps: true});
 

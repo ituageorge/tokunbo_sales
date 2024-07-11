@@ -6,10 +6,20 @@
     "allowJs": true,
     "checkJs": false,
     "types": ["next", "node"],
+    // "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   }
 }
 
+// // jsconfig.json
+// {
+//   "compilerOptions": {
+//     "baseUrl": ".",
+//     "paths": {
+//       "@/components/*": ["src/components/*"]
+//     }
+//   }
+// }
 

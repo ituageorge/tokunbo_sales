@@ -47,3 +47,12 @@ div.tabs > *.active{
 .flying-button-parent button{
     @apply border-primary bg-primary text-white rounded-full;
 }
+
+input[type="button"] {
+    @apply bg-gray-400
+}
+
+input[value="Delete User History"] {
+    @apply bg-red-400
+}
+

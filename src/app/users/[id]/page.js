@@ -1,10 +1,12 @@
 'use client';
-import { useProfile } from "@/components/UseProfile";
-import UserForm from "@/components/layout/UserForm";
-import UserTabs from "@/components/layout/UserTabs";
+import { useProfile } from "../../../components/UseProfile";
+
+import UserForm from "../../../components/layout/UserForm";
+import UserTabs from "../../../components/layout/UserTabs";
 import {useParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
+
 
 export default function EditUserPage() {
   const {loading, data} = useProfile();
@@ -12,32 +14,34 @@ export default function EditUserPage() {
   const {id} = useParams();
 
   useEffect(() => {
-    fetch('/api/profile?_id='+id).then(res => {
-      res.json().then(user => {
-        setUser(user);
-      });
-    })
-  }, []);
+    async function fetchUser() {
+      try {
+        const response = await fetch('/api/profile?_id='+id);
+        const userData = await response.json();
+        setUser(userData);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchUser();
+  }, [id]);
 
   async function handleSaveButtonClick(ev, data) {
     ev.preventDefault();
-    const promise = new Promise(async (resolve, reject) => {
-      const res = await fetch('/api/profile', {
+    try {
+      const response = await fetch('/api/profile', {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({...data,_id:id}),
       });
-      if (res.ok)
-        resolve();
-      else
-        reject();
-    });
-
-    await toast.promise(promise, {
-      loading: 'Saving user...',
-      success: 'User saved',
-      error: 'An error has occurred while saving the user',
-    });
+      if (response.ok) {
+        toast.success('User saved');
+      } else {
+        toast.error('An error has occurred while saving the user');
+      }
+    } catch (error) {
+      toast.error('An error has occurred while saving the user');
+    }
   }
 
   if (loading) {

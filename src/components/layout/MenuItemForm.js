@@ -1,31 +1,27 @@
-import Plus from "@/components/icons/Plus";
-import Trash from "@/components/icons/Trash";
-import EditableImage from "@/components/layout/EditableImage";
-import MenuItemPriceProps from "@/components/layout/MenuItemPriceProps";
+
+import EditableImage from "../../components/layout/EditableImage";
+import MenuItemPriceProps from "../../components/layout/MenuItemPriceProps";
 import {useEffect, useState} from "react";
 
-export default function MenuItemForm({onSubmit, menuItem}) {
-  const [image, setImage] = useState(menuItem && menuItem?.image || '');
-  const [name, setName] = useState(menuItem && menuItem?.name || '' );
-  const [description, setDescription] = useState(menuItem && menuItem.description || '');
-  const [basePrice, setBasePrice] = useState(menuItem && menuItem?.basePrice || '');
-  const [sizes, setSizes] = useState(menuItem && menuItem?.sizes || []);
-  const [category, setCategory] = useState(menuItem && menuItem?.category || '');
+export default function MenuItemForm({onSubmit,menuItem}) {
+  const [image, setImage] = useState(menuItem?.image || '');
+  const [name, setName] = useState(menuItem?.name || '');
+  const [description, setDescription] = useState(menuItem?.description || '');
+  const [basePrice, setBasePrice] = useState(menuItem?.basePrice || '');
+  const [sizes, setSizes] = useState(menuItem?.sizes || []);
+  const [category, setCategory] = useState(menuItem?.category || '');
   const [categories, setCategories] = useState([]);
   const [
     extraIngredientPrices,
     setExtraIngredientPrices,
-  ] = useState(menuItem && menuItem?.extraIngredientPrices || []);
+  ] = useState(menuItem?.extraIngredientPrices || []);
 
   useEffect(() => {
     fetch('/api/categories').then(res => {
-      // console.log('rees', res)
       res.json().then(categories => {
         setCategories(categories);
       });
     });
-  
-   
   }, []);
 
   return (

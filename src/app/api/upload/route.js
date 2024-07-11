@@ -1,33 +1,6 @@
 import { NextResponse } from "next/server";
 
-// export default async (req, res) => {
-//   if (req.method === 'POST') {
-//     try {
-//       const file = req.files.file;
-//       console.log('reqFile33', file)
-//       const parser = new DatauriParser();
-//       const base64Image = parser.format(path.extname(file.originalname).toString(), file.buffer);
-//       const uploadedImageResponse = await cloudinary.uploader.upload(base64Image.content);
-
-//       res.status(200).json({
-//         success: true,
-//         data: uploadedImageResponse,
-//       });
-//     } catch (error) {
-//       res.status(500).json({
-//         success: false,
-//         error: error.message,
-//       });
-//     }
-//   } else {
-//     res.status(405).json({
-//       success: false,
-//       error: 'Method not allowed',
-//     });
-//   }
-// };
-
-export const POST = async(req, res) => {
+export const POST = async(req) => {
   
     const formData = await req.formData()
     // console.log('req12', req.formData())
