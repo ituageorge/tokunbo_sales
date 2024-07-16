@@ -12,7 +12,7 @@ import {  usePathname } from 'next/navigation';
  const path = usePathname();
 
  return (
-    <div className="flex mx-auto gap-2 tabs justify-center flex-wrap">
+    <div className="flex my-5 mx-auto gap-2 tabs justify-center flex-wrap">
       <Link
         className={path === '/profile' ? 'active' : ''}
         href={'/profile'}
@@ -51,6 +51,12 @@ import {  usePathname } from 'next/navigation';
         href={`/debt/`}
       >
         Debt
+      </Link>
+      <Link
+        className={path === '/requests' ? 'active' : ''}
+         href={'/requests'}
+      >
+        Requests
       </Link>
 
         </>

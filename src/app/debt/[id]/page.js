@@ -13,6 +13,7 @@ import { format } from "date-fns";
 import InputField  from "../../../components/InputComponent/InputField";
 
 import { v4 as uuidv4 } from "uuid";
+import Link from "next/link";
 
 export default function DebtPagePayment() {
   const session = useSession();
@@ -212,6 +213,9 @@ export default function DebtPagePayment() {
         <div className="m-4">
         <SectionHeaders mainHeader="debt" />
         </div>
+        <Link href="/debt">
+          <span className="text-blue-500 text-lg underline">Go Back</span>
+        </Link>
 
         {isAdmin && (
         <InputField
@@ -300,7 +304,7 @@ export default function DebtPagePayment() {
       <TableBody  items={
             debt
               ? debt.map((e) => {
-                  console.log({ e });
+                  // console.log({ e });
                   if (e.amountPaid == 0) {
                     e.amountPaid = null;
                   }

@@ -15,7 +15,7 @@ export async function POST(req) {
 
   // Read and parse the request body
   const body = await req.json();
-  console.log("lllop1", body);
+  // console.log("lllop1", body);
 
   try {
     const { additionalDebt, amountPaid, newBalance, userId } = body;
@@ -55,8 +55,8 @@ export async function GET(req) {
   try {
     let data = await Debt.find({ userId });
   
-    console.log("datayy", data);
-    console.log("datayylength", data.length);
+    // console.log("datayy", data);
+    // console.log("datayylength", data.length);
     // return Response.json( await Debt.findById(userId) );
     return Response.json({ data });
   } catch (error) {
@@ -75,10 +75,15 @@ export async function DELETE_USER_DEBTS(req) {
 
   // Convert the _id string to an ObjectId
   const userId = new mongoose.Types.ObjectId(_id);
+ 
+  // Check if the user is admin
+ if (!(await isAdmin(req))) {
+  throw new Error("Unauthorized");
+}
 
   try {
     let data = await Debt.deleteMany({ userId });
-    console.log("deleteDebtHistory", data);
+    // console.log("deleteDebtHistory", data);
     return Response.status(200).json({ message: 'Debt history deleted successfully' });
   } catch (error) {
     console.error(error);
@@ -109,7 +114,7 @@ export async function DELETE(req) {
      if (!debt) {
        return Response.json({ message: "Debt not found" });
      }
-     console.log("deleteDebtRow", debt);
+    //  console.log("deleteDebtRow", debt);
 
      // Return the deleted debt
      return Response.json({

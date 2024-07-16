@@ -41,7 +41,7 @@ export default function MenuItem(menuItem) {
   }
 
   async function handleAddToCartButtonClick() {
-    console.log("add to cart");
+    // console.log("add to cart");
     const hasOptions =
       (sizes || []).length > 0 ||
       (extraIngredientPrices || []).length > 0 ||

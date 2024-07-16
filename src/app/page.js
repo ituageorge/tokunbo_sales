@@ -14,12 +14,15 @@ export default function Home() {
           mainHeader={'About us'}
         />
         <div className="text-gray-500 max-w-md mx-auto mt-4 flex flex-col gap-4">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni minima odit recusandae. Illum ipsa non repudiandae? Eum ipsam iste quos suscipit tempora? Aperiam esse fugiat inventore laboriosam officiis quam rem!
+        <p>
+            At Ladipo Market, we pride ourselves on providing a wide range of genuine tokunbo vehicle parts and accessories. Our market has built a reputation for reliability and quality, ensuring that every part you purchase meets the highest standards.
           </p>
-          <p>At consectetur delectus ducimus est facere iure molestias obcaecati quaerat vitae voluptate? Aspernatur dolor explicabo iste minus molestiae pariatur provident quibusdam saepe?</p>
-          <p>Laborum molestias neque nulla obcaecati odio quia quod reprehenderit sit vitae voluptates? Eos, tenetur.</p>
-        </div>
+          <p>
+            We understand the importance of using authentic parts to maintain the performance and longevity of your vehicle. That's why we source our products directly from trusted dealers, offering you peace of mind and excellent value for your money.
+          </p>
+          <p>
+            Whether you're a professional mechanic, auto part dealer or a car enthusiast, our market is your one-stop destination for all your automotive needs. From engines and brakes to electronics and body parts, we have everything you need to keep your vehicle in top condition.
+          </p>    </div>
       </section>
       <section className="text-center my-8" id="contact">
         <SectionHeaders

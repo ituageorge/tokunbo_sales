@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 // import Email from "next-auth/providers/email";
 
 const ResetPassword = (params) => {
-  console.log(params.token);
+  // console.log(params.token);
   const router = useRouter();
   const [error, setError] = useState("");
   const [verified, setVerified] = useState(false);

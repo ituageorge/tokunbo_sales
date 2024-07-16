@@ -8,10 +8,10 @@ export async function POST(req) {
 
   try {
     const reqBuffer = await req.text();
-    console.log('reqq.bufferrr', reqBuffer)
+    // console.log('reqq.bufferrr', reqBuffer)
     const signSecret = process.env.STRIPE_SIGN_SECRET;
     event = stripe.webhooks.constructEvent(reqBuffer, sig, signSecret);
-    console.log("eevveenntt", event)
+    // console.log("eevveenntt", event)
   } catch (e) {
     console.error('stripe error');
     console.log(e);

@@ -14,7 +14,7 @@ export async function GET() {
     let debtors = await User.find({ _id: { $in: debtorsIds } });
     //   console.log("userssss", debtors);
       const debtorsEmails = debtors.map(debtor => {
-        console.log("DeebtUserId", debtor._id )
+        // console.log("DeebtUserId", debtor._id )
         return debtor.email});
     //   console.log("debtorsEmail", debtorsEmails)
 
@@ -40,7 +40,7 @@ const extractedData = response.map((debtor) => {
   };
 });
 
-console.log("extracted", extractedData);
+// console.log("extracted", extractedData);
 
 return Response.json(extractedData);
     } catch (error) {
