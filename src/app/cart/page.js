@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { CartContext, cartProductPrice } from "../../components/AppContext";
 
 import AddressInputs from "../../components/layout/AddressInputs";
