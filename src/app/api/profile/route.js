@@ -41,7 +41,7 @@ export async function GET(req) {
   } else {
     const session = await getServerSession(authOptions);
 
-    console.log("sessionppp", session);
+    // console.log("sessionppp", session);
 
     const email = session?.user?.email;
     if (!email) {

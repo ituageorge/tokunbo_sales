@@ -300,7 +300,7 @@ export default function DebtPagePayment() {
       <TableBody  items={
             debt
               ? debt.map((e) => {
-                  console.log({ e });
+                  // console.log({ e });
                   if (e.amountPaid == 0) {
                     e.amountPaid = null;
                   }

@@ -27,7 +27,7 @@ const CartOrdered = () => {
     fetchCartOrdered();
   }, []);
 
-  console.log("rres123", cartOrderData)
+  // console.log("rres123", cartOrderData)
 
   const columns = [
     {

@@ -18,7 +18,7 @@ export default function ProfilePage() {
     try {
       const response = await fetch('/api/profile');
       const data = await response.json();
-      console.log("ddaatta", data);
+      // console.log("ddaatta", data);
       setUser(data);
       setIsAdmin(data.admin);
       setProfileFetched(true);

@@ -14,10 +14,10 @@ export const POST = async (request) => {
     new Error('password must be at least 5 characters');
   }
 
-console.log("existingEEmaill", email);
+// console.log("existingEEmaill", email);
 
  const existingUser = await User.findOne({email});
- console.log("existingUser222", existingUser)
+//  console.log("existingUser222", existingUser)
 
  const salt = bcrypt.genSaltSync(10);
  existingUser.password = bcrypt.hashSync(password, salt);

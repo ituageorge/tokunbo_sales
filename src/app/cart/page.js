@@ -20,13 +20,13 @@ export default function CartPage() {
 
 const router = useRouter();
 
-  console.log('crprofileData1243', profileData.userId)
+  // console.log('crprofileData1243', profileData.userId)
   const userId =  profileData.userId;
 
   const userData = session.data?.user;
   let userName = userData?.name || userData?.email;
   let userImage = userData?.image;
-  console.log("userImage", userImage)
+  // console.log("userImage", userImage)
 
 
   useEffect(() => {

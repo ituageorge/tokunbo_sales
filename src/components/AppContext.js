@@ -53,12 +53,12 @@ export function AppProvider({children}) {
   }
 
   function addToCart(product, size=null, extras=[], totalPriceOfProduct, totalProductQty) {
-    console.log('prricre', totalPriceOfProduct)
+    // console.log('prricre', totalPriceOfProduct)
     setCartProducts(prevProducts => {
       const cartProduct = {...product, size, extras, totalPriceOfProduct, totalProductQty};
       const newProducts = [...prevProducts, cartProduct];
       saveCartProductsToLocalStorage(newProducts);
-      console.log('nnnweprodduct',  newProducts);
+      // console.log('nnnweprodduct',  newProducts);
       return newProducts;
     });
   }

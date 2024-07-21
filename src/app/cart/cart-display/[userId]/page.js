@@ -40,8 +40,8 @@ export default function CartOrdered() {
         toast.success('Delivered');
         const data = await response.json();
 
-        console.log('data123', data);
-        console.log('response123', response);
+        // console.log('data123', data);
+        // console.log('response123', response);
 
         // Update the product state to reflect that it's been delivered
         setOnlineOrder((prevOnlineOrder) => {

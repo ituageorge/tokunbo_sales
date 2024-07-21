@@ -47,14 +47,14 @@ export const POST = async (req) => {
   mongoose.connect(process.env.MONGO_URL);
 
   const existingUser = await User.findOne({ email });
-  console.log('eemaal', existingUser)
+  // console.log('eemaal', existingUser)
 
   if (!existingUser) {
     return new NextResponse("Email does not exist", { status: 400 });
   }
 
   const resetToken = crypto.randomBytes(20).toString('hex');
-  console.log('rres', resetToken)
+  // console.log('rres', resetToken)
  const passwordResetToken = crypto
  .createHash("sha256")
  .update(resetToken)
@@ -66,7 +66,7 @@ export const POST = async (req) => {
  existingUser.resetTokenExpiry = passwordResetExpires;
 
  const resetUrl = `localhost:3000/reset-password/${resetToken}`;
-  console.log("resetUrl", resetUrl) //localhost:3000/reset-password/e1d64505948c09ce62ea1e1f4e243cee38e5383f
+  // console.log("resetUrl", resetUrl) //localhost:3000/reset-password/e1d64505948c09ce62ea1e1f4e243cee38e5383f
 
   await sendEmail(email, "Password reset", resetUrl, resetToken);
 
