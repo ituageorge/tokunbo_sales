@@ -1,40 +1,34 @@
-// import Header from "../components/layout/Header";
-import Hero from "../components/layout/Hero";
-import HomeMenu from "../components/layout/HomeMenu";
-import SectionHeaders from "../components/layout/SectionHeaders";
+import Image from 'next/image';
+import Link from 'next/link';
 
-export default function Home() {
+export default function Page() {
   return (
-    <>
-      <Hero />
-      <HomeMenu />
-      <section className="text-center my-16" id="about">
-        <SectionHeaders
-          subHeader={'Our story'}
-          mainHeader={'About us'}
-        />
-        <div className="text-gray-500 max-w-md mx-auto mt-4 flex flex-col gap-4">
-        <p>
-            At Ladipo Market, we pride ourselves on providing a wide range of genuine tokunbo vehicle parts and accessories. Our market has built a reputation for reliability and quality, ensuring that every part you purchase meets the highest standards.
-          </p>
-          <p>
-            We understand the importance of using authentic parts to maintain the performance and longevity of your vehicle. That's why we source our products directly from trusted dealers, offering you peace of mind and excellent value for your money.
-          </p>
-          <p>
-            Whether you're a professional mechanic, auto part dealer or a car enthusiast, our market is your one-stop destination for all your automotive needs. From engines and brakes to electronics and body parts, we have everything you need to keep your vehicle in top condition.
-          </p>    </div>
-      </section>
-      <section className="text-center my-8" id="contact">
-        <SectionHeaders
-          subHeader={'Don\'t hesitate'}
-          mainHeader={'Contact us'}
-        />
-        <div className="mt-8">
-          <a className="text-4xl underline text-gray-500" href=" +234 8062701633">
-            +234 8062701633
-          </a>
+    <section className="page">
+      <div className="py-8 md:py-12">
+        <h1 className="text-4xl font-semibold">
+          Welcome to our site<br />
+          Where you&apos;ll find<br />
+          the best parts
+        </h1>
+        <p className="my-6 text-gray-500 text-sm">
+          We&apos;re dedicated to providing you with the best vehicle parts and accessories.
+        </p>
+        <div className="flex gap-4 text-sm">
+          <Link href="/shop">
+            <button className="flex justify-center bg-primary uppercase items-center gap-2 text-white px-4 py-2 rounded-full">
+              Shop Now
+            </button>
+          </Link>
+          <Link href="/contact">
+            <button className="flex items-center border-0 gap-2 py-2 text-gray-600 font-semibold">
+              Contact Us
+            </button>
+          </Link>
         </div>
-      </section>
-    </>
-  )
+      </div>
+      <div className="relative hidden md:block">
+        <Image src={'/images/shop.png'} layout={'fill'} objectFit={'contain'} alt={'Shop'} />
+      </div>
+    </section>
+  );
 }

@@ -7,7 +7,7 @@ export const POST = async(req) => {
     formData.append("upload_preset", process.env.CLOUDINARY_UPLOAD_PRESET)
     formData.append("cloud_name", process.env.CLOUDINARY_NAME)
 
-    const file = formData.get('file')
+    // const file = formData.get('file')
     // console.log('file', file)
     let rez
       try {

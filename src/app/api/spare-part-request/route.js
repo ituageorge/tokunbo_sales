@@ -13,12 +13,12 @@ export async function POST(req) {
   const email = session.user.email;
   // console.log("uuserrI234", email);
 
-  const user = await User.findOne({email});
+  // const user = await User.findOne({email});
   const userInfo = await UserInfo.findOne({email: email});
   // console.log("ueseerInfo", userInfo)
-  const {city, country, createdAt, phone, postalCode, streetAddress, userId} = userInfo;
+  const { userId} = userInfo;
 
-  const filterUser = { userId: user._id };
+  // const filterUser = { userId: user._id };
   // console.log("userfilter", filterUser)
 
 
@@ -54,7 +54,7 @@ export async function POST(req) {
       );
 }}
 
-export async function GET(req) {
+export async function GET() {
   try {
     // Connect to MongoDB
     await mongoose.connect(process.env.MONGO_URL);

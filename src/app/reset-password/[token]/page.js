@@ -11,7 +11,7 @@ const ResetPassword = (params) => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [verified, setVerified] = useState(false);
-const [user, setUser] = useState(null);
+// const [user, setUser] = useState(null);
   // const session = useSession();
   const { status: sessionStatus } = useSession();
   const search = useSearchParams();
@@ -36,8 +36,8 @@ const [user, setUser] = useState(null);
         if (res.status === 200) {
           setError("");
           setVerified(true)
-          const userData = await res.json();
-          setUser(userData);
+          // const userData = await res.json();
+          // setUser(userData);
         }
       } catch (error) {
         setError("Error, try again");

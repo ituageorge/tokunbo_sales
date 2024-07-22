@@ -39,7 +39,7 @@ export default function CartOrdered() {
             throw new Error('Error updating product delivered to true');
         }
         toast.success('Delivered');
-        const data = await response.json();
+        // const data = await response.json();
 
         // console.log('data123', data);
         // console.log('response123', response);

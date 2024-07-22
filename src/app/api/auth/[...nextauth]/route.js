@@ -1,9 +1,8 @@
 import clientPromise from "../../../../libs/mongoConnect";
-
-import { UserInfo } from "../../../models/UserInfo"
+import { UserInfo } from "../../../models/UserInfo";
 import bcrypt from "bcrypt";
 import * as mongoose from "mongoose";
-import {User} from '../../../models/User';
+import { User } from "../../../models/User";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
@@ -21,22 +20,22 @@ export const authOptions = {
       name: 'Credentials',
       id: 'credentials',
       credentials: {
-        username: { label: "Email", type: "email", placeholder: "your_email_address.com" },
+        email: { label: "Email", type: "email", placeholder: "your_email_address.com" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         const email = credentials?.email;
         const password = credentials?.password;
 
-        mongoose.connect(process.env.MONGO_URL);
-        const user = await User.findOne({email});
+        await mongoose.connect(process.env.MONGO_URL);
+        const user = await User.findOne({ email });
         const passwordOk = user && bcrypt.compareSync(password, user.password);
 
         if (passwordOk) {
           return user;
         }
 
-        return null
+        return null;
       }
     })
   ],
@@ -47,7 +46,7 @@ export async function isAdmin(session) {
   if (!userEmail) {
     return false;
   }
-  const userInfo = await UserInfo.findOne({email:userEmail});
+  const userInfo = await UserInfo.findOne({ email: userEmail });
   if (!userInfo) {
     return false;
   }
@@ -56,4 +55,4 @@ export async function isAdmin(session) {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST};
+export { handler as GET, handler as POST };

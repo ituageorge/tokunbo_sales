@@ -34,7 +34,7 @@ export async function GET(req) {
     // const user = await User.findOne({email});
     const userInfo = await UserInfo.findOne({email: email});
     // console.log("ueseerInfo", userInfo)
-    const {city, country, phone, postalCode, streetAddress, userId} = userInfo;
+    const {city, country, phone, postalCode, streetAddress} = userInfo;
   
     const responsePayload = {
         ...request.toObject(),

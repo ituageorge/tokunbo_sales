@@ -70,11 +70,11 @@ export async function GET(req) {
 
 export async function DELETE_USER_DEBTS(req) {
   mongoose.connect(process.env.MONGO_URL);
-  const url = new URL(req.url);
-  const _id = url.searchParams.get("_id");
+  // const url = new URL(req.url);
+  // const _id = url.searchParams.get("_id");
 
   // Convert the _id string to an ObjectId
-  const userId = new mongoose.Types.ObjectId(_id);
+  // const userId = new mongoose.Types.ObjectId(_id);
  
   // Check if the user is admin
  if (!(await isAdmin(req))) {
@@ -82,7 +82,7 @@ export async function DELETE_USER_DEBTS(req) {
 }
 
   try {
-    let data = await Debt.deleteMany({ userId });
+    // let data = await Debt.deleteMany({ userId });
     // console.log("deleteDebtHistory", data);
     return Response.status(200).json({ message: 'Debt history deleted successfully' });
   } catch (error) {
