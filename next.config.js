@@ -8,20 +8,7 @@
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true, // Ensure SWC is enabled
-    // babel: {
-    //     presets: ['next/babel'],
-    //   },
-    // experimental: {
-    //   trace: false,
-    // },
-    // modules: {
-    //   css: {
-    //     loader: 'postcss-loader',
-    //     options: {
-    //       plugins: () => [require('tailwindcss')],
-    //     },
-    //   },
-    // },
+   
     images: {
         domains: ['res.cloudinary.com'],
         remotePatterns: [

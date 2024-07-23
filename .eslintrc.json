@@ -1,11 +1,12 @@
-
 {
   "root": true,
   "env": {
     "node": true
   },
   "rules": {
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "react/prop-types": "off", // Disable prop-types rule
+     "react/react-in-jsx-scope": "off"
     // other rules...
   },
   "parserOptions": {
@@ -14,8 +15,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "requireConfigFile" : false
-   
+    "requireConfigFile": false
   },
   "plugins": [
     "react"
@@ -24,7 +24,6 @@
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:react/recommended",
-    "next/core-web-vitals",
     "plugin:@next/next/recommended"
   ],
   "settings": {
