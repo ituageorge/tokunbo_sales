@@ -31,7 +31,7 @@ export default function ProfilePage() {
       .then((data) => setDebtors(data));
   }, []);
 
-  console.log("debt3333333", debtors);
+  // console.log("debt3333333", debtors);
 
   const renderCell = (item, columnKey) => {
     if (!item || !columnKey) return ""; // or return a default value

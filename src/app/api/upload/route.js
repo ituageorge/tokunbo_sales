@@ -8,7 +8,7 @@ export const POST = async(req) => {
     formData.append("cloud_name", process.env.CLOUDINARY_NAME)
 
     const file = formData.get('file')
-    console.log('file', file)
+    // console.log('file', file)
     let rez
       try {
         console.log("hi")
@@ -18,7 +18,7 @@ export const POST = async(req) => {
           body: formData  
         })
         const response = await rez.json()
-        console.log('reeespo', response)
+        // console.log('reeespo', response)
         // return
         return new NextResponse(JSON.stringify(response.url), {status: 201})
         // res.status(200).json({ url: result.secure_url });

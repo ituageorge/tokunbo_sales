@@ -42,11 +42,11 @@ export const authOptions = {
 };
 
 export async function isAdmin(session) {
-  const userEmail = session?.user?.email;
+  const userEmail = session.user.email;
   if (!userEmail) {
     return false;
   }
-  const userInfo = await UserInfo.findOne({ email: userEmail });
+  const userInfo = await UserInfo.findOne({email:userEmail});
   if (!userInfo) {
     return false;
   }

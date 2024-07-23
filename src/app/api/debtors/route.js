@@ -9,14 +9,10 @@ export async function GET() {
   
     try {
       let debtorsIds = await Debt.distinct('userId');
-    //   console.log("debtorsIds", debtorsIds);
        // Use $in operator to find users with matching IDs
     let debtors = await User.find({ _id: { $in: debtorsIds } });
-    //   console.log("userssss", debtors);
       const debtorsEmails = debtors.map(debtor => {
-        console.log("DeebtUserId", debtor._id )
         return debtor.email});
-    //   console.log("debtorsEmail", debtorsEmails)
 
       let debtorsInfo = await UserInfo.find({email: {$in: debtorsEmails}});
      
@@ -28,7 +24,6 @@ export async function GET() {
 
         };
       });
-console.log('ghfftff', response);
 
 const extractedData = response.map((debtor) => {
   return {
@@ -39,8 +34,6 @@ const extractedData = response.map((debtor) => {
     phone: debtor.phone,
   };
 });
-
-console.log("extracted", extractedData);
 
 return Response.json(extractedData);
     } catch (error) {

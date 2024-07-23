@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 
 const stripe = require("stripe")(process.env.STRIPE_SK);
-// console.log("stripe", stripe);
+
 
 export async function POST(req) {
   mongoose.connect(process.env.MONGO_URL);
