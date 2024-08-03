@@ -12,6 +12,7 @@ export async function GET() {
        // Use $in operator to find users with matching IDs
     let debtors = await User.find({ _id: { $in: debtorsIds } });
       const debtorsEmails = debtors.map(debtor => {
+        // console.log("DeebtUserId", debtor._id )
         return debtor.email});
 
       let debtorsInfo = await UserInfo.find({email: {$in: debtorsEmails}});
@@ -34,6 +35,8 @@ const extractedData = response.map((debtor) => {
     phone: debtor.phone,
   };
 });
+
+// console.log("extracted", extractedData);
 
 return Response.json(extractedData);
     } catch (error) {

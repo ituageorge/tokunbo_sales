@@ -74,6 +74,12 @@ export async function GET() {
 
 const filterUser = { userId: user._id };
 
+
+// const {name, image, _id} = user;
+// console.log("name222", name);
+// console.log("image222", image);
+// console.log("userId2223", _id.toString())
+
   try {
     const onlineOrder = await OnLineOrder.findOne(filterUser).lean();
 

@@ -5,21 +5,10 @@
     "esModuleInterop": true,
     "allowJs": true,
     "checkJs": false,
-    "types": ["next", "node"],
-    // "baseUrl": ".",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "exclude": ["node_modules", "dist"]
 }
-
-// // jsconfig.json
-// {
-//   "compilerOptions": {
-//     "baseUrl": ".",
-//     "paths": {
-//       "@/components/*": ["src/components/*"]
-//     }
-//   }
-// }
-

@@ -1,5 +1,4 @@
 'use client';
-// import SectionHeaders from "../components/layout/SectionHeaders";
 import SectionHeaders from "../../components/layout/SectionHeaders";
 
 import MenuItem from "../../components/menu/MenuItem";

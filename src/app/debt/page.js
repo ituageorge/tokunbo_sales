@@ -70,7 +70,7 @@ export default function ProfilePage() {
 
   return (
     <section>
-        <UserTabs  />
+              <UserTabs isAdmin={true} />
       <div className="text-center m-3">
         <SectionHeaders mainHeader="debtors" />
       </div>

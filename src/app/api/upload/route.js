@@ -7,11 +7,11 @@ export const POST = async(req) => {
     formData.append("upload_preset", process.env.CLOUDINARY_UPLOAD_PRESET)
     formData.append("cloud_name", process.env.CLOUDINARY_NAME)
 
-    const file = formData.get('file')
+    // const file = formData.get('file')
     // console.log('file', file)
     let rez
       try {
-        console.log("hi")
+        // console.log("hi")
         // const result = await cloudinary.uploader.upload(file, { upload_preset: 'uploads' });
          rez = await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_NAME}/image/upload`, {
           method: "POST", 

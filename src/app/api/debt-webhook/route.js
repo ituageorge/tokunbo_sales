@@ -51,9 +51,10 @@ export async function POST(req) {
 
   try {
     const reqBuffer = await req.text();
-
+    // console.log('req.debt.buffer', reqBuffer)
     const signSecret = process.env.STRIPE_SK;
     event = stripe.webhooks.constructEvent(reqBuffer, sig, signSecret);
+    // console.log("eevveenntt-DEbt", event)
   } catch (e) {
     console.error('stripe error');
     console.error(e);
@@ -61,6 +62,7 @@ export async function POST(req) {
   }
 
   if (event.type === 'checkout.session.completed') {
+    // console.log('event', event);
     const orderId = event?.data?.object?.metadata?.orderId;
     const isPaid = event?.data?.object?.payment_status === 'paid';
     if (isPaid) {

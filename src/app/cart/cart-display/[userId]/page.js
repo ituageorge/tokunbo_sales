@@ -4,6 +4,7 @@ import { Card, CardHeader, CardBody, Image, Chip, Button } from '@nextui-org/rea
 import { format } from "date-fns";
 import SectionHeaders from '../../../../components/layout/SectionHeaders';
 import toast from "react-hot-toast";
+import Link from 'next/link';
 
 export default function CartOrdered() {
   const [onlineOrder, setOnlineOrder] = useState({});
@@ -38,7 +39,7 @@ export default function CartOrdered() {
             throw new Error('Error updating product delivered to true');
         }
         toast.success('Delivered');
-        const data = await response.json();
+        // const data = await response.json();
 
         // console.log('data123', data);
         // console.log('response123', response);
@@ -204,6 +205,11 @@ const handleDelete = async (productId) => {
 </CardBody>
 
     </Card>
+    <div className='text-center'>
+        <Link href="/cart/cart-order-users">
+          <span className="text-blue-500 hover:underline text-lg">Go Back</span>
+        </Link>
+      </div>
     </React.Fragment>
   );
 }

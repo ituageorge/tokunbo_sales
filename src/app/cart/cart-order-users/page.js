@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { v4 as uuidv4 } from "uuid";
 import SectionHeaders from '../../../components/layout/SectionHeaders';
+import UserTabs from '../../../components/layout/UserTabs';
 
 const CartOrdered = () => {
   const [cartOrderData, setCartOrderData] = useState([]);
@@ -42,13 +43,18 @@ const CartOrdered = () => {
       key: 'phone',
       label: 'PHONE',
     },
+    {
+      key: 'actions',
+      label: 'ACTIONS',
+    },
   ];
 
   return (
     <React.Fragment>
-        <div className='my-5 text-lg text-center '>
+      <UserTabs isAdmin={true} />
+        <div className='my-12 text-lg text-center text-red-500'>
          <SectionHeaders
-          subHeader={'Users with Online Orders'}
+          minorHeader={"Users' Orders with Outside payment"}
         />
         </div>
     <div>
@@ -73,6 +79,11 @@ const CartOrdered = () => {
                 <TableCell>
                   <Link href={`/cart/cart-display/${item.userId}`}>{item.address.phone}</Link>
                 </TableCell>
+                <TableCell>
+                    <Link href={`/cart/cart-display/${item.userId}`}>
+                      <button className="bg-blue-500 text-white px-4 py-2 rounded">Display</button>
+                    </Link>
+                  </TableCell>
               </TableRow>
             )}
           </TableBody>

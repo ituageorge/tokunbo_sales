@@ -18,6 +18,9 @@ export default function EditMenuItemPage() {
   const [redirectToItems, setRedirectToItems] = useState(false);
   const {loading, data} = useProfile();
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
+
   useEffect(() => {
     fetch('/api/menu-items').then(res => res.json()).then(items => {
       const item = items.find(i => i?._id === id);
@@ -27,7 +30,37 @@ export default function EditMenuItemPage() {
 
   async function handleFormSubmit(ev, data) {
     ev.preventDefault();
+
+    
     data = {...data, _id:id};
+
+     // Check if there is an image to upload
+     if (selectedFile) {
+      const dataForm = new FormData();
+      dataForm.set('file', selectedFile);
+      console.log("selectedfile", selectedFile);
+
+
+      const uploadPromise = fetch('/api/upload', {
+        method: 'POST',
+        body: dataForm,
+      }).then(response => {
+        if (response.ok) {
+          return response.json().then(link => {
+            data.image = link; // Add the uploaded image link to the data object
+            console.log("uploadMenuImage", link)
+          });
+        }
+        throw new Error('Something went wrong');
+      });
+
+      await toast.promise(uploadPromise, {
+        loading: 'Uploading image...',
+        success: 'Image uploaded',
+        error: 'Upload error',
+      });
+    }
+
     try {
       const response = await fetch('/api/menu-items', {
         method: 'PUT',
@@ -66,7 +99,7 @@ export default function EditMenuItemPage() {
   }
 
   if (loading) {
-    return 'Loading user info...';
+    return 'Loading Edit menu-item info...';
   }
 
   if (data &&!data.admin) {
@@ -82,7 +115,7 @@ export default function EditMenuItemPage() {
           <span>Show all menu items</span>
         </Link>
       </div>
-      <MenuItemForm menuItem={menuItem} onSubmit={handleFormSubmit}  />
+      <MenuItemForm menuItem={menuItem} onSubmit={handleFormSubmit} setSelectedFile={setSelectedFile} />
       <div className="max-w-md mx-auto mt-2">
         <div className="max-w-xs ml-auto pl-4">
           <DeleteButton
