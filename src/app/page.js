@@ -18,16 +18,16 @@ export default function Home() {
             At Ladipo Market, we pride ourselves on providing a wide range of genuine vehicle parts and accessories. Our market has built a reputation for reliability and quality, ensuring that every part you purchase meets the highest standards.
           </p>
           <p>
-            We understand the importance of using authentic parts to maintain the performance and longevity of your vehicle. That's why we source our products directly from trusted manufacturers, offering you peace of mind and excellent value for your money.
+            We understand the importance of using authentic parts to maintain the performance and longevity of your vehicle. That&apos;s why we source our products directly from trusted manufacturers, offering you peace of mind and excellent value for your money.
           </p>
           <p>
-            Whether you're a professional mechanic or a car enthusiast, our market is your one-stop destination for all your automotive needs. From engines and brakes to electronics and body parts, we have everything you need to keep your vehicle in top condition.
+            Whether you&apos;re a professional mechanic or a car enthusiast, our market is your one-stop destination for all your automotive needs. From engines and brakes to electronics and body parts, we have everything you need to keep your vehicle in top condition.
           </p>
         </div>
       </section>
       <section className="text-center my-8" id="contact">
         <SectionHeaders
-          subHeader={'Don\'t hesitate'}
+          subHeader={'Don\' t hesitate'}
           mainHeader={'Contact us'}
         />
         <div className="mt-8">

@@ -4,9 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 
 export default function Hero() {
+  const router = useRouter()
   const { status } = useSession(); // Get the user's authentication status
   const isAuthenticated = status === "authenticated"; // Determine if the user is authenticated
 
@@ -15,7 +17,7 @@ export default function Hero() {
       // e.preventDefault(); // Prevent the default action of the link
       toast.error("Please log in to access the request form.");
     } else {
-      onClick();
+      router.push("/spare-part-request-form")
     }
   };
 
@@ -33,20 +35,21 @@ export default function Hero() {
         <p className="my-6 text-gray-500 text-sm">
           Get your authentic vehicle parts and accessories here.
         </p>
-        <p className="text-gray-500 text-sm">
+        <p className="text-gray-500 my-2 text-sm">
           Looking for a specific item not available on our web page? Fill out our request form, and we&apos;ll search for the item for you.
         </p>
         <div className="flex gap-4 text-sm">
-          <Link href="/spare-part-request-form" onClick={handleRequestFormClick}>
+          {/* <Link href="/spare-part-request-form"> */}
             <button
+             onClick={handleRequestFormClick}
               type="button"
               className="flex justify-center bg-primary uppercase items-center gap-2 text-white px-4 py-2 rounded-full"
-              disabled={!isAuthenticated} // Disable the button if the user is not authenticated
+              // disabled={!isAuthenticated} // Disable the button if the user is not authenticated
             >
               Request Form 
               <Right />
             </button>
-          </Link>
+          {/* </Link> */}
           <Link href="/">
             <button className="flex items-center border-0 gap-2 py-2 text-gray-600 font-semibold">
               Learn more

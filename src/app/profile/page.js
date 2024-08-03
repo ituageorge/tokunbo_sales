@@ -62,8 +62,8 @@ export default function ProfilePage() {
         });
       }
       
-      const savingPromise = new Promise(async (resolve, reject) => {
-        const response = await fetch('/api/profile', {
+      const savingPromise = new Promise( (resolve, reject) => {
+        const response = fetch('/api/profile', {
           method: 'PUT',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(data),

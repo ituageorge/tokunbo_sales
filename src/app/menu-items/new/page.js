@@ -52,6 +52,7 @@ export default function NewMenuItemPage() {
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' },
       });
+      const result = await response.json();
       if (!response.ok) {
         toast.error(result.error );
       }
