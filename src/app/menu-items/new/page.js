@@ -13,9 +13,39 @@ export default function NewMenuItemPage() {
 
   const [redirectToItems, setRedirectToItems] = useState(false);
   const {loading, data} = useProfile();
+  const [selectedFile, setSelectedFile] = useState(null);
+
 
   async function handleFormSubmit(ev, data) {
     ev.preventDefault();
+
+     // Check if there is an image to upload
+    if (selectedFile) {
+      const dataForm = new FormData();
+      dataForm.set('file', selectedFile);
+      console.log("selectedfile", selectedFile);
+
+      const uploadPromise = fetch('/api/upload', {
+        method: 'POST',
+        body: dataForm,
+      }).then(response => {
+        if (response.ok) {
+          return response.json().then(link => {
+            data.image = link; // Add the uploaded image link to the data object
+            console.log("uploadMenuImage", link)
+          });
+        }
+        throw new Error('Something went wrong');
+      });
+
+      await toast.promise(uploadPromise, {
+        loading: 'Uploading image...',
+        success: 'Image uploaded',
+        error: 'Upload error',
+      });
+    }
+
+    
     try {
       const response = await fetch('/api/menu-items', {
         method: 'POST',
@@ -23,7 +53,7 @@ export default function NewMenuItemPage() {
         headers: { 'Content-Type': 'application/json' },
       });
       if (!response.ok) {
-        throw new Error('Error saving menu item');
+        toast.error(result.error );
       }
       toast.success('Saved');
       setRedirectToItems(true);
@@ -31,6 +61,7 @@ export default function NewMenuItemPage() {
       console.error(error);
       toast.error('Error');
     }
+    
   }
 
   if (redirectToItems) {
@@ -38,7 +69,7 @@ export default function NewMenuItemPage() {
   }
 
   if (loading) {
-    return 'Loading user info...';
+    return 'Loading menu info...';
   }
 
   if (data &&!data.admin) {
@@ -54,7 +85,7 @@ export default function NewMenuItemPage() {
           <span>Show all menu items</span>
         </Link>
       </div>
-      <MenuItemForm menuItem={null} onSubmit={handleFormSubmit} />
+      <MenuItemForm menuItem={null} onSubmit={handleFormSubmit} setSelectedFile={setSelectedFile}/>
     </section>
   );
 }

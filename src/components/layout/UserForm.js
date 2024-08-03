@@ -1,17 +1,11 @@
 'use client';
-import AddressInputs from "../layout/AddressInputs";
-
-// import {useProfile} from "../components/UseProfile";
-import {useProfile} from "../UseProfile";
-// import { useSession } from "next-auth/react";
+import AddressInputs from "../../components/layout/AddressInputs";
+import EditableImage from "../../components/layout/EditableImage";
+import {useProfile} from "../../components/UseProfile";
 
 import {useState} from "react";
-import EditableImage from "./EditableImage";
 
-export default function UserForm({user,onSave}) {
-  // const session = useSession();
-// const id = session?.data?.user?._id;
-
+export default function UserForm({user, onSave, setSelectedFile}) {
   const [userName, setUserName] = useState(user?.name || '');
   const [image, setImage] = useState(user?.image || '');
   const [phone, setPhone] = useState(user?.phone || '');
@@ -34,14 +28,14 @@ export default function UserForm({user,onSave}) {
     <div className="md:flex gap-4">
       <div>
         <div className="p-2 rounded-lg relative max-w-[120px]">
-          <EditableImage link={image} setLink={setImage} />
+          <EditableImage link={image} setLink={setImage} setSelectedFile={setSelectedFile} />
         </div>
       </div>
       <form
         className="grow"
         onSubmit={ev =>
           onSave(ev, {
-            name:userName, userId: user?._id, image, phone, admin,
+            name:userName, image, phone, admin,
             streetAddress, city, country, postalCode,
           })
         }

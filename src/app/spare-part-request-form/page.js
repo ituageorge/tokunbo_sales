@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-// import axios from 'axios';
 import EditableImage from '../../components/layout/EditableImage';
 
 export default function SparePartRequestPage() {
@@ -10,26 +9,63 @@ export default function SparePartRequestPage() {
   const [sparePartImage, setSparePartImage] = useState('');
   const [modelOfVehiclePart, setModelOfVehiclePart] = useState('');
   const [nameOfPart, setNameOfPart] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Prepare data object
+    const data = {
+      sparePartDescription,
+      sparePartImage,
+      modelOfVehiclePart,
+      nameOfPart,
+    };
+
+    // Check if there is an image to upload
+    if (selectedFile) {
+      const dataForm = new FormData();
+      dataForm.set('file', selectedFile);
+      console.log("selectedFile", selectedFile);
+
+      const uploadPromise = fetch('/api/upload', {
+        method: 'POST',
+        body: dataForm,
+      }).then(response => {
+        if (response.ok) {
+          return response.json().then(link => {
+            data.sparePartImage = link; // Add the uploaded image link to the data object
+            console.log("link", link);
+          });
+        }
+        throw new Error('Something went wrong');
+      });
+
+      await toast.promise(uploadPromise, {
+        loading: 'Uploading image...',
+        success: 'Image uploaded',
+        error: 'Upload error',
+      });
+    }
+
     try {
-      
       const response = await fetch('/api/spare-part-request', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({sparePartDescription,
-            sparePartImage,
-            modelOfVehiclePart,
-            nameOfPart,}),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
       if (response.ok) {
         toast.success("Request is saved...");
-        // window.location = await response.json();
+
+        // Clear the form inputs
+        setSparePartDescription('');
+        setSparePartImage('');
+        setModelOfVehiclePart('');
+        setNameOfPart('');
+        setSelectedFile(null);
       } else {
         toast.error("Something went wrong... Please try again later");
       }
-      // toast.success(response.data.message);
     } catch (error) {
       console.error(error);
       toast.error('An error occurred while submitting the request.');
@@ -42,19 +78,18 @@ export default function SparePartRequestPage() {
         <Toaster />
         <h1 className="text-2xl font-bold mb-4">Spare Part Request Form</h1>
         <form onSubmit={handleSubmit} className="grow space-y-4">
-        <div>
+          <div>
             <label htmlFor="sparePartImage" className="block text-sm font-medium text-gray-700">
               Spare Part Image URL
             </label>
             <div className="p-2 rounded-lg relative max-w-[120px]">
-          <EditableImage link={sparePartImage} setLink={setSparePartImage} />
-        </div>
+              <EditableImage link={sparePartImage} setLink={setSparePartImage} setSelectedFile={setSelectedFile} />
+            </div>
           </div>
           <div>
             <label htmlFor="sparePartDescription" className="block text-sm font-medium text-gray-700">
               Spare Part Description
             </label>
-           
             <textarea
               id="sparePartDescription"
               value={sparePartDescription}
@@ -64,7 +99,6 @@ export default function SparePartRequestPage() {
               required
             ></textarea>
           </div>
-         
           <div>
             <label htmlFor="modelOfVehiclePart" className="block text-sm font-medium text-gray-700">
               Model of Vehicle Part
@@ -77,15 +111,14 @@ export default function SparePartRequestPage() {
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               required
             />
-
           </div>
           <div>
-            <label htmlFor="NameOfPart" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="nameOfPart" className="block text-sm font-medium text-gray-700">
               Name of Part
             </label>
             <input
               type="text"
-              id="NameOfPart"
+              id="nameOfPart"
               value={nameOfPart}
               onChange={(e) => setNameOfPart(e.target.value)}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"

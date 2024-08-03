@@ -1,8 +1,24 @@
+"use client"
 import Right from "../../components/icons/Right";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
+
 
 export default function Hero() {
+  const { status } = useSession(); // Get the user's authentication status
+  const isAuthenticated = status === "authenticated"; // Determine if the user is authenticated
+
+  const handleRequestFormClick = (e) => {
+    if (!isAuthenticated) {
+      // e.preventDefault(); // Prevent the default action of the link
+      toast.error("Please log in to access the request form.");
+    } else {
+      onClick();
+    }
+  };
+
   return (
     <section className="hero md:mt-4">
       <div className="py-8 md:py-12">
@@ -21,8 +37,12 @@ export default function Hero() {
           Looking for a specific item not available on our web page? Fill out our request form, and we&apos;ll search for the item for you.
         </p>
         <div className="flex gap-4 text-sm">
-          <Link href="/spare-part-request-form">
-            <button className="flex justify-center bg-primary uppercase items-center gap-2 text-white px-4 py-2 rounded-full">
+          <Link href="/spare-part-request-form" onClick={handleRequestFormClick}>
+            <button
+              type="button"
+              className="flex justify-center bg-primary uppercase items-center gap-2 text-white px-4 py-2 rounded-full"
+              disabled={!isAuthenticated} // Disable the button if the user is not authenticated
+            >
               Request Form 
               <Right />
             </button>

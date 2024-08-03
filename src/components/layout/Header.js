@@ -1,21 +1,34 @@
 'use client';
-// import {CartContext} from "../components/AppContext";
-import Bars2 from "../icons/Bars2";
-import ShoppingCart from "../icons/ShoppingCart";
+import {CartContext} from "../../components/AppContext";
+
+import Bars2 from "../../components/icons/Bars2";
+import ShoppingCart from "../../components/icons/ShoppingCart";
 import {signOut, useSession} from "next-auth/react";
 import Link from "next/link";
 import {useContext, useState} from "react";
-import { CartContext } from "../AppContext";
+import { useRouter } from 'next/navigation';
+
 
 function AuthLinks({status, userName}) {
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    router.push('/'); // Manually redirect to the sign-in page
+
+    // signOut(); // Prevent automatic redirect
+
+     signOut({ redirect: false }); // Prevent automatic redirect
+  };
+
   if (status === 'authenticated') {
     return (
       <>
-        <Link href={'/profile'} className="whitespace-nowrap ">
+        <Link href={'/profile'} className="whitespace-nowrap">
           Hello, {userName}
         </Link>
         <button
-          onClick={() => signOut()}
+          onClick={handleSignOut}
+          // onClick={() => signOut()}
           className="bg-primary rounded-full text-white px-8 py-2">
           Logout
         </button>
@@ -36,7 +49,6 @@ function AuthLinks({status, userName}) {
 
 export default function Header() {
   const session = useSession();
-  // console.log({session})
   const status = session?.status;
   const userData = session.data?.user;
   let userName = userData?.name || userData?.email;
@@ -49,7 +61,7 @@ export default function Header() {
     <header>
       <div className="flex items-center md:hidden justify-between">
         <Link className="text-primary font-semibold text-2xl" href={'/'}>
-        Spare parts and Accessories
+          ST PIZZA
         </Link>
         <div className="flex gap-8 items-center">
           <Link href={'/cart'} className="relative">
@@ -79,9 +91,9 @@ export default function Header() {
         </div>
       )}
       <div className="hidden md:flex items-center justify-between">
-        <nav className="flex items-center gap-8 text-gray-500 font-semibold px-3">
-          <Link className="text-primary font-semibold text-2xl px-2" href={'/'}>
-           Spare parts and Accessories
+        <nav className="flex items-center gap-8 text-gray-500 font-semibold">
+          <Link className="text-primary font-semibold text-2xl" href={'/'}>
+            ST PIZZA
           </Link>
           <Link href={'/'}>Home</Link>
           <Link href={'/menu'}>Menu</Link>

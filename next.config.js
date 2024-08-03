@@ -34,10 +34,10 @@ const nextConfig = {
                 protocol:'https',
                 hostname: '*.googleusercontent.com',
             },
-            {
-                protocol: 'https',
-                hostname: "tokunbo-ordering-sales.s3.amazonaws.com"
-            }
+            // {
+            //     protocol: 'https',
+            //     hostname: "tokunbo-ordering-sales.s3.amazonaws.com"
+            // }
         ]
     }
 }

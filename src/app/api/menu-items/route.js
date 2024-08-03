@@ -1,17 +1,28 @@
+import mongoose from 'mongoose';
+import { MenuItem } from '../../models/MenuItem';
+import { isAdmin } from '../auth/[...nextauth]/route';
 
-import {isAdmin} from "../auth/[...nextauth]/route";
-
-import mongoose from "mongoose";
-import {MenuItem} from "../../models/MenuItem";
 
 export async function POST(req) {
-  mongoose.connect(process.env.MONGO_URL);
+  await mongoose.connect(process.env.MONGO_URL);
   const data = await req.json();
+  // console.log("data4menu-item", data)
+
+  // Ensure category is a valid ObjectId or null
+  if (data.category === "") {
+    data.category = null;
+    return new Response(JSON.stringify({ error: 'Choose a category' }), { status: 400 });
+  }
+
   if (await isAdmin()) {
-    const menuItemDoc = await MenuItem.create(data);
-    return Response.json(menuItemDoc);
+    try {
+      const menuItemDoc = await MenuItem.create(data);
+      return new Response(JSON.stringify({ message: 'Menu item created successfully' }), { status: 201 });
+    } catch (error) {
+      return new Response(JSON.stringify({ error: error.message }), { status: 400 });
+    }
   } else {
-    return Response.json({});
+    return new Response(JSON.stringify({ message: 'Unauthorized' }), { status: 403 });
   }
 }
 
