@@ -6,7 +6,9 @@
 
 
 const nextConfig = {
-
+    env: {
+        MONGO_URL:'mongodb+srv://george_12:george_12@georgemedia.8qi2i.mongodb.net/tokunbo_sales',
+    },
     // babel: {
     //     presets: ['next/babel'],
     //   },
