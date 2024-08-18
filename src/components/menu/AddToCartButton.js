@@ -9,8 +9,10 @@ export default function AddToCartButton({
 
   const handleClick = () => {
     if (!isAuthenticated) {
-      toast.error("Please log in to add items to your cart.");
+      toast.success("items added to my cart.");
+      onClick();
     } else {
+    // toast.success("Added to cart")
       onClick();
     }
   };

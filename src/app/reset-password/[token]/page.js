@@ -45,13 +45,13 @@ const ResetPassword = (params) => {
       }
    }
    verifyToken();
-  }, [params.token]);
+  }, []);
 
   useEffect(() => {
     if (sessionStatus === "authenticated") {
       router.replace("/dashboard");
     }
-  }, [sessionStatus, router]);
+  }, [sessionStatus]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

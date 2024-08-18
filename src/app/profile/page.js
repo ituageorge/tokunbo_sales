@@ -30,7 +30,7 @@ export default function ProfilePage() {
         })
       });
     }
-  }, [session, status]);
+  }, [status]);
 
   async function handleProfileInfoUpdateWithImage(ev, data) {
     ev.preventDefault();

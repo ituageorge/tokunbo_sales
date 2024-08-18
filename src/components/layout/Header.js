@@ -36,6 +36,7 @@ function AuthLinks({status, userName}) {
     );
   }
   if (status === 'unauthenticated') {
+    handleSignOut();
     return (
       <>
         <Link href={'/login'}>Login</Link>

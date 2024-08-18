@@ -27,7 +27,7 @@ export default function OrderPage() {
         });
       })
     }
-  }, [clearCart, id]);
+  }, [id]);
 
   let subtotal = 0;
   if (order !== undefined && order.cartProducts !== undefined) {

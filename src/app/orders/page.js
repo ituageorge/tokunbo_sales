@@ -22,7 +22,7 @@ export default function OrdersPage() {
       })
     }
     fetchOrders();
-  }, [setOrders, setLoadingOrders]);
+  }, []);
 
   return (
     <section className="mt-8 max-w-2xl mx-auto">

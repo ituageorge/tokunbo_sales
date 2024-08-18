@@ -71,7 +71,8 @@ const handleDelete = async (productId) => {
     });
 
     if (!response.ok) {
-      throw new Error('Error deleting product');
+      toast.error('Error deleting product')
+      // throw new Error('Error deleting product');
     }
 
     const data = await response.json();
@@ -199,7 +200,8 @@ const handleDelete = async (productId) => {
     <p
       className="text-lg text-center text-red-500"
     >
-      {error}
+      {/* {error} */}
+      An Error has occured
     </p>
   )}
 </CardBody>

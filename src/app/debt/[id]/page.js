@@ -35,7 +35,7 @@ export default function DebtPagePayment() {
         })
       });
     }
-  }, [session, status]);
+  }, [status]);
 
   const columns = [
     { name: "AMOUNT SETTLED", uid: "amountPaid" },
@@ -116,7 +116,7 @@ export default function DebtPagePayment() {
 
   useEffect(() => {
     fetchDebts();
-  }, [fetchDebts]);
+  }, []);
 
   const handleDeleteDebtRow = async (id) => {
     try {

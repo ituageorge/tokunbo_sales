@@ -1,7 +1,5 @@
 "use client";
-// import Link from "next/link";
 import { CartContext, cartProductPrice } from "../../components/AppContext";
-
 import AddressInputs from "../../components/layout/AddressInputs";
 import SectionHeaders from "../../components/layout/SectionHeaders";
 import CartProduct from "../../components/menu/CartProduct";
@@ -10,11 +8,12 @@ import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 
 
 export default function CartPage() {
   const session = useSession();
+  const {status} = session;
   const { clearCart, cartProducts, removeCartProduct } = useContext(CartContext);
   const [address, setAddress] = useState({});
   const { data: profileData } = useProfile();
@@ -63,6 +62,11 @@ const router = useRouter();
 
    
   async function handleCartToOrder() {
+    if (status !== "authenticated") {
+      toast.error("You need to be logged in to place an order.");
+      return;
+    }
+
     try {
       const response = await fetch("/api/cart-no-mobilePay", {
         method: "POST",
@@ -98,6 +102,12 @@ const router = useRouter();
 
   async function proceedToCheckout(ev) {
     ev.preventDefault();
+
+    if (status !== "authenticated") {
+      toast.error("You need to be logged in to proceed to checkout.");
+      return;
+    }
+
     // address and shopping cart products
     try {
       const response = await fetch("/api/checkout", {
@@ -175,15 +185,24 @@ const router = useRouter();
               addressProps={address}
               setAddressProp={handleAddressChange}
             />
-            <button type="submit">Pay ${subtotal + 5}</button>
+            <button
+             disabled={status !== "authenticated"}
+             type="submit">Pay ${subtotal + 5}</button>
           </form>
           <div className="mt-5">
           <button
     className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
     onClick={handleCartToOrder}
+    disabled={status !== "authenticated"}
   >
-    Place your Order 
+    Place your Order (and pay with POS)
   </button>
+  {status !== "authenticated" && (
+              <p className="text-red-500 mt-2">  
+              <Link href={'/login'}> Please log in to place an order.</Link>  
+             
+            </p>
+            )}
   </div>
         </div>
       
