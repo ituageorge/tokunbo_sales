@@ -22,7 +22,7 @@ export default function CartProduct({product, onRemove, index}) {
         {product.extras?.length > 0 && (
           <div className="text-sm text-gray-500">
             {product.extras.map(extra => (
-              <div key={extra.name}>{extra.name} ${extra.price}</div>
+              <div key={extra.name}>{extra.name} &#8358;{extra.price}</div>
             ))}
           </div>
         )}
@@ -32,7 +32,7 @@ export default function CartProduct({product, onRemove, index}) {
       </div>
       
       <div className="text-lg font-semibold">
-     ${product.totalPriceOfProduct}
+      &#8358;{product.totalPriceOfProduct}
       </div>
      
       {!!onRemove && (
