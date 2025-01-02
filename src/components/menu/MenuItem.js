@@ -177,7 +177,7 @@ export default function MenuItem(menuItem) {
                         checked={selectedSize?.name === size.name}
                         name="size"
                       />
-                      {size.name} ${basePrice + size.price}
+                      {size.name} &#8358;{basePrice + size.price}
                     </label>
                   ))}
                 </div>
@@ -294,7 +294,7 @@ export default function MenuItem(menuItem) {
                 className="primary sticky bottom-2"
                 onClick={handleAddToCartButtonClick}
               >
-                Add to cart ${selectedPrice}
+                Add to cart &#8358;{selectedPrice}
               </button>
 
               <button className="mt-2" onClick={() => setShowPopup(false)}>

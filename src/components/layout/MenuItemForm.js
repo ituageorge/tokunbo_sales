@@ -79,7 +79,7 @@ export default function MenuItemForm({ onSubmit, menuItem, setSelectedFile }) {
           </select>
           <label>Base price</label>
           <input
-            type="text"
+            type="number"
             value={basePrice}
             onChange={ev => setBasePrice(ev.target.value)}
           />

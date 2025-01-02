@@ -171,10 +171,10 @@ const router = useRouter();
               Total:
             </div>
             <div className="font-semibold pl-2 text-right">
-              ${subtotal}
+            &#8358;{subtotal}
               <br />
-              $5
-              <br />${subtotal + 5}
+              &#8358;2000
+              <br />&#8358;{subtotal + 2000}
             </div>
           </div>
         </div>
@@ -187,7 +187,7 @@ const router = useRouter();
             />
             <button
              disabled={status !== "authenticated"}
-             type="submit">Pay ${subtotal + 5}</button>
+             type="submit">Pay &#8358;{subtotal + 2000}</button>
           </form>
           <div className="mt-5">
           <button

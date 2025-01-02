@@ -24,9 +24,9 @@ export default function AddToCartButton({
       className="mt-4 bg-primary text-white rounded-full px-8 py-2"
     >
       {hasSizesOrExtras ? (
-        <span>Add to cart (from ${basePrice})</span>
+        <span>Add to cart (from &#8358;{basePrice})</span>
       ) : (
-        <span>Add to cart ${basePrice}</span>
+        <span>Add to cart &#8358;{basePrice}</span>
       )}
     </button>
   );
