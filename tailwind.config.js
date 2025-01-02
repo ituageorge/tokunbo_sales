@@ -1,4 +1,4 @@
-import {nextui} from "@nextui-org/react";
+// import {nextui} from "@nextui-org/react";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -15,6 +15,6 @@ module.exports = {
      }
     },
   },
-  plugins: [nextui()],
+  plugins: [],
   darkMode: 'class',
 }
