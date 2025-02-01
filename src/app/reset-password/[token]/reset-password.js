@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'eact';
+import { useState } from 'react'; // Fixed typo from 'eact' to 'react'
 import Link from 'next/link';
 
 export default function ResetPasswordPage() {
@@ -30,31 +30,36 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <section className="mt-8">
+    <section className="mt-8 px-4 sm:px-6 lg:px-8">
       <h1 className="text-center text-primary text-4xl mb-4">Reset Password</h1>
-      <form className="flex flex-col space-y-4 w-64 mx-auto" onSubmit={handleFormSubmit}>
+      <form className="flex flex-col space-y-4 w-full max-w-sm mx-auto" onSubmit={handleFormSubmit}>
         <input
           type="text"
           name="token"
-          placeholder="token"
+          placeholder="Token"
           value={token}
           onChange={(e) => setToken(e.target.value)}
+          className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary"
         />
         <input
           type="password"
           name="password"
-          placeholder="new password"
+          placeholder="New Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary"
         />
         <input
           type="password"
           name="confirmPassword"
-          placeholder="confirm new password"
+          placeholder="Confirm New Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary"
         />
-        <button type="submit">Reset Password</button>
+        <button type="submit" className="bg-primary text-white rounded-md p-2 hover:bg-primary-dark transition">
+          Reset Password
+        </button>
         {success && (
           <div className="my-4 text-center text-green-500">
             Password reset successful! You can now login with your new password.
@@ -67,7 +72,7 @@ export default function ResetPasswordPage() {
         )}
       </form>
       <div className="text-center my-4 text-gray-500">
-        <Link href="/login">Back to login</Link>
+        <Link href="/login" className="hover:underline">Back to login</Link>
       </div>
     </section>
   );

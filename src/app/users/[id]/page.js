@@ -1,22 +1,20 @@
 'use client';
 import { useProfile } from "../../../components/UseProfile";
-
 import UserForm from "../../../components/layout/UserForm";
 import UserTabs from "../../../components/layout/UserTabs";
-import {useParams} from "next/navigation";
-import {useEffect, useState} from "react";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-
 export default function EditUserPage() {
-  const {loading, data} = useProfile();
+  const { loading, data } = useProfile();
   const [user, setUser] = useState(null);
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await fetch('/api/profile?_id='+id);
+        const response = await fetch('/api/profile?_id=' + id);
         const userData = await response.json();
         setUser(userData);
       } catch (error) {
@@ -31,8 +29,8 @@ export default function EditUserPage() {
     try {
       const response = await fetch('/api/profile', {
         method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({...data,_id:id}),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, _id: id }),
       });
       if (response.ok) {
         toast.success('User saved');
@@ -53,7 +51,7 @@ export default function EditUserPage() {
   }
 
   return (
-    <section className="mt-8 mx-auto max-w-2xl">
+    <section className="mt-8 mx-auto max-w-2xl px-4">
       <UserTabs isAdmin={true} />
       <div className="mt-8">
         <UserForm user={user} onSave={handleSaveButtonClick} />

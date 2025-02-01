@@ -54,7 +54,7 @@ export default function RequestsPage() {
   };
 
   return (
-    <section className="mt-8 max-w-2xl mx-auto">
+    <section className="mt-8 max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="py-2">
         <SectionHeaders mainHeader="Requests" />
       </div>
@@ -65,8 +65,8 @@ export default function RequestsPage() {
           requests.map(request => (
             <div
               key={request._id}
-              className="bg-gray-100 mb-2 p-4 rounded-lg flex flex-col md:flex-row items-center gap-6">
-              <div className="grow flex flex-col md:flex-row items-center gap-6">
+              className="bg-gray-100 mb-2 p-4 rounded-lg flex flex-col md:flex-row items-start md:items-center gap-4">
+              <div className="grow flex flex-col md:flex-row items-start md:items-center gap-4">
                 <div className="grow">
                   <div className="flex gap-2 items-center mb-1">
                     <div className="grow">{request.sparePartDescription}</div>
@@ -77,15 +77,15 @@ export default function RequestsPage() {
                   </div>
                 </div>
               </div>
-              <div className="justify-end flex gap-2 items-center whitespace-nowrap">
+              <div className="flex gap-2 items-center whitespace-nowrap">
                 <Link href={`/requests/${request._id}`}>
-                  <b className="button bg-blue-500 text-white px-4 py-2 rounded">
+                  <b className="button bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
                     Show request
                   </b>
                 </Link>
                 <button
                   onClick={() => handleDelete(request._id)}
-                  className="button bg-red-500 text-white px-4 py-2 rounded">
+                  className="button bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
                   Delete
                 </button>
               </div>

@@ -2,8 +2,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-// Orriginal or Initial forget Password
-
 export default function ForgetPassword() {
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
@@ -30,7 +28,7 @@ export default function ForgetPassword() {
   }
 
   return (
-    <section className="mt-8">
+    <section className="mt-8 px-4">
       <h1 className="text-center text-primary text-4xl mb-4">
         Forgot Password
       </h1>
@@ -38,11 +36,17 @@ export default function ForgetPassword() {
         <input
           type="email"
           name="email"
-          placeholder="email"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
         />
-        <button type="submit">Send Reset Link</button>
+        <button
+          type="submit"
+          className="w-full bg-primary text-white p-2 rounded-lg hover:bg-primary-dark transition-colors"
+        >
+          Send Reset Link
+        </button>
         {sent && (
           <div className="my-4 text-center text-green-500">
             Reset link sent to your email!
@@ -55,7 +59,12 @@ export default function ForgetPassword() {
         )}
       </form>
       <div className="text-center my-4 text-gray-500">
-        <Link href="/login">Back to login</Link>
+        <Link
+          href="/login"
+          className="text-blue-500 hover:underline"
+        >
+          Back to login
+        </Link>
       </div>
     </section>
   );

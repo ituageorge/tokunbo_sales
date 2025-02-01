@@ -1,25 +1,20 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
-// import Email from "next-auth/providers/email";
 
 const ResetPassword = (params) => {
-  // console.log(params.token);
   const router = useRouter();
   const [error, setError] = useState("");
   const [verified, setVerified] = useState(false);
-// const [user, setUser] = useState(null);
-  // const session = useSession();
   const { status: sessionStatus } = useSession();
   const search = useSearchParams();
-  const email = search.get('email')
+  const email = search.get('email');
 
   useEffect(() => {
-   const verifyToken = async () => {
-     try {
+    const verifyToken = async () => {
+      try {
         const res = await fetch("/api/verify-token", {
           method: "POST",
           headers: {
@@ -31,27 +26,25 @@ const ResetPassword = (params) => {
         });
         if (res.status === 400) {
           setError("Invalid token or has expired");
-          setVerified(true)
+          setVerified(true);
         }
         if (res.status === 200) {
           setError("");
-          setVerified(true)
-          // const userData = await res.json();
-          // setUser(userData);
+          setVerified(true);
         }
       } catch (error) {
         setError("Error, try again");
         console.log(error);
       }
-   }
-   verifyToken();
-  }, []);
+    };
+    verifyToken();
+  }, [params.token]);
 
   useEffect(() => {
     if (sessionStatus === "authenticated") {
       router.replace("/dashboard");
     }
-  }, [sessionStatus]);
+  }, [sessionStatus, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,8 +57,8 @@ const ResetPassword = (params) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-         password,
-          email
+          password,
+          email,
         }),
       });
       if (res.status === 400) {
@@ -73,50 +66,45 @@ const ResetPassword = (params) => {
       }
       if (res.status === 200) {
         setError("");
-       router.push("/login");
-       toast.success('Reset Password Successful!')
+        router.push("/login");
+        toast.success('Reset Password Successful!');
       }
     } catch (error) {
       setError("Error, try again");
       toast.error("Error, try again");
       console.log(error);
     }
-
   };
 
-  if (sessionStatus === "loading" || verified) {
-    return <h1>Loading...</h1>;
+  if (sessionStatus === "loading" || !verified) {
+    return <h1 className="text-center mt-10">Loading...</h1>;
   }
 
   return (
     sessionStatus !== "authenticated" && (
-      <div className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="bg-[#212121] p-8 rounded shadow-md w-96">
-          <h1 className="text-4xl text-center font-semibold mb-8 text-gray-300">Reset Password</h1>
+      <div className="flex min-h-screen items-center justify-center bg-gray-900 p-4">
+        <div className="bg-[#212121] p-6 rounded-lg shadow-lg w-full max-w-md">
+          <h1 className="text-3xl font-semibold text-center text-gray-300 mb-6">Reset Password</h1>
           <form onSubmit={handleSubmit}>
             <input
               type="password"
-              className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus:text-black"
+              className="w-full border border-gray-600 text-white bg-gray-700 rounded-lg px-4 py-2 mb-4 focus:outline-none focus:border-blue-500"
               placeholder="Password"
               required
             />
-          
             <button
               type="submit"
               disabled={error.length > 0}
-              className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+              className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
             >
-              {" "}
               Reset Password
             </button>
-            <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
+            {error && <p className="text-red-500 text-sm mt-4 text-center">{error}</p>}
           </form>
-          
-          </div>
-          </div>
-        )
-      );
-    };
-    
+        </div>
+      </div>
+    )
+  );
+};
 
 export default ResetPassword;
