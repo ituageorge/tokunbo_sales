@@ -87,6 +87,7 @@ export default function DebtPagePayment() {
             </div>
           );
         }
+        break;
       default:
         return cellValue;
     }
